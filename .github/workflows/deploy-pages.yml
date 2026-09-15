@@ -2,7 +2,7 @@ name: Deploy Compose portfolio
 
 on:
   push:
-    branches: [main]
+    branches: [main, feature/my-portfolio]
   workflow_dispatch:
 
 permissions:
@@ -39,6 +39,7 @@ jobs:
           path: composeApp/build/dist/wasmJs/productionExecutable
 
   deploy:
+    if: github.ref == 'refs/heads/main'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
